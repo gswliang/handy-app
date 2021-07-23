@@ -1,0 +1,28 @@
+nav{
+    display: flex;
+    justify-content: center;
+    margin: .5rem 0;
+}
+
+.navbar{
+    font-size: 1.5rem;
+    margin: .4rem;
+    width: 170px;
+    height: 50px;
+    background: #20CC9F;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar>a{
+    text-decoration: none;
+    padding: .5rem;
+    color: #fff;
+}
+
+.navbar:hover{
+    background: #54897C;
+}

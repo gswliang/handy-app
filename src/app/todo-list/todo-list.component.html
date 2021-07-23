@@ -1,0 +1,22 @@
+<app-navibar></app-navibar>
+<div class="todo-container">
+    <h1 class="header">Todo-List</h1>
+    <div class="form">
+        <div class="input-area">
+            <input type="search" id="todo" [(ngModel)]="todoName" (keyup.enter)="onSubmit()">
+            <button (click)="onSubmit()">Submit</button>
+        </div>
+        <div class="show-content">
+            <ul *ngFor="let todo of todoList">
+                <li>
+                    <div class="todo">{{todo}}</div>
+                    <div class=" remove " (click)="onRemove(todo) ">
+                        <fa-icon class="icon " [icon]="faTimes "></fa-icon>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</div>
