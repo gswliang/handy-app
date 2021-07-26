@@ -1,16 +1,15 @@
+
 nav{
     display: flex;
-    justify-content: center;
-    margin: .5rem 0;
+    justify-content: flex-start;
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #20CC9F;
+    height: 60px;
 }
 
 .navbar{
     font-size: 1.5rem;
-    margin: .4rem;
-    width: 170px;
-    height: 50px;
-    background: #20CC9F;
-    border-radius: 20px;
+    width: 130px;   
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -24,5 +23,5 @@ nav{
 }
 
 .navbar:hover{
-    background: #54897C;
+    background: #1FA17F;
 }

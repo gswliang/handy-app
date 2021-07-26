@@ -1,0 +1,112 @@
+.main_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Noto Sans TC', sans-serif;
+    box-sizing: border-box;
+    width: 85%;
+}
+
+.search_container > p{
+    font-size: 2rem;
+    font-weight: 700;
+    margin: .6rem;
+    color: #43C6A4;
+}
+
+
+.search_bar_container{
+    display: flex;
+    justify-content: center;
+    height: 3rem;
+    margin-top: 1rem;
+    padding: .4rem;
+}
+
+.search_input{
+    display: flex;
+    height: 100%;
+    width: 20rem;
+    border: 1px solid #E2EBE9;
+    border-radius: 0.2rem;
+    align-items: center;
+}
+
+.search_icon{
+    font-size: 1.7rem;
+    color: #B4B6B6;
+    margin: 0 .8rem;
+}
+
+.search_bar{
+    width: 16rem;
+    height: 2.5rem;
+    border: none;
+}
+
+.search_input:focus{
+    outline: 1px solid #189E7C;
+}
+
+.search_btn{
+    width: 6rem;
+    background: #43C6A4;
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+}
+
+.search_btn:hover{
+    background: #22B68F;
+}
+
+.search_btn:active{
+    background: #349A7F;
+}
+
+input:focus{
+    outline: none;
+}
+
+input[type="search"]
+{
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+::placeholder{
+    opacity: 0.3;
+}
+
+.video_container{
+    border: 1px solid black;
+    height: 90vh;  /* 需修改回來*/
+    width: 85%;
+    display: flex;
+    margin-top: 1rem;
+}
+
+.video_detail_container{
+    border: 1px solid red;
+    width: 65%; /* 需修改回來*/
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 2;
+}
+
+.video_items{
+    border: 1px solid yellow;
+    flex-basis: 1;
+    width: 35%; /* 需修改回來flex-basis: 1*/
+}
+
+
+
+

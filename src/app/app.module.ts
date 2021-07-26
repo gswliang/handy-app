@@ -7,6 +7,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './home/home.component';
 import { NavibarComponent } from './navibar/navibar.component';
+import { VideostreamComponent } from './videostream/videostream.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -15,12 +17,14 @@ import { NavibarComponent } from './navibar/navibar.component';
     TodoListComponent,
     HomeComponent,
     NavibarComponent,
+    VideostreamComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

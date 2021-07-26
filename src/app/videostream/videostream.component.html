@@ -1,0 +1,20 @@
+<app-navibar></app-navibar>
+<div class="main_container">
+    <div class="search_container">
+        <p>uTube - Video Search</p>
+        <div class="search_bar_container">
+            <div class="search_input">
+                <fa-icon class="search_icon " [icon]="faSearchIcon "></fa-icon>
+                <input class="search_bar" type="search" placeholder="search.." #searchTerm (keyup.enter)='onSubmit(searchTerm.value)' />
+            </div>
+            <button class="search_btn" (click)='onSubmit(searchTerm.value)'>Search</button>
+        </div>
+    </div>
+    <div class="video_container">
+        <div class="video_detail_container">
+            <div class="video_detail"></div>
+            <div class="video_description"></div>
+        </div>
+        <div class="video_items"></div>
+    </div>
+</div>
