@@ -1,0 +1,44 @@
+<div class="videolist_container" *ngFor="let list of videoLists$ | async" (click)="onSelected(list)">
+
+    <div class="video_img">
+        <img src={{list.picURL}} alt={{list.title}}>
+    </div>
+    <div class="video_title">{{list.title}}</div>
+
+</div>
+<!-- 
+<div class="videolist_container">
+    <div class="video_img">
+        <img src="https://images.unsplash.com/photo-1627308595228-9d0497edbe74?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80"
+            alt="hi">
+    </div>
+    <div class="video_title">【漆彈大作戰 2】拒絕被虐漆彈直播！(Splatoon 2)</div>
+</div>
+<div class="videolist_container">
+    <div class="video_img">
+        <img src="https://images.unsplash.com/photo-1627308595228-9d0497edbe74?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80"
+            alt="hi">
+    </div>
+    <div class="video_title">【漆彈大作戰 2】拒絕被虐漆彈直播！(Splatoon 2)</div>
+</div>
+<div class="videolist_container">
+    <div class="video_img">
+        <img src="https://images.unsplash.com/photo-1627308595228-9d0497edbe74?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80"
+            alt="hi">
+    </div>
+    <div class="video_title">【漆彈大作戰 2】拒絕被虐漆彈直播！(Splatoon 2)</div>
+</div>
+<div class="videolist_container">
+    <div class="video_img">
+        <img src="https://images.unsplash.com/photo-1627308595228-9d0497edbe74?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80"
+            alt="hi">
+    </div>
+    <div class="video_title">【漆彈大作戰 2】拒絕被虐漆彈直播！(Splatoon 2)</div>
+</div>
+<div class="videolist_container">
+    <div class="video_img">
+        <img src="https://images.unsplash.com/photo-1627308595228-9d0497edbe74?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80"
+            alt="hi">
+    </div>
+    <div class="video_title">【漆彈大作戰 2】拒絕被虐漆彈直播！(Splatoon 2)</div>
+</div> -->

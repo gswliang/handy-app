@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 1000px;
 }
 
 .search_container{
@@ -50,12 +51,14 @@
     border: none;
 }
 
+
 .search_input:focus{
-    outline: 1px solid #189E7C;
+    outline: 1px solid red;  /* #189E7C */
 }
 
 .search_btn{
     width: 6rem;
+    height: 100%;
     background: #43C6A4;
     color: #fff;
     font-size: 1.2rem;
@@ -78,6 +81,7 @@ input[type="search"]
 {
     font-size: 1.5rem;
     font-weight: 300;
+    color: #595F5F;
 }
 
 ::placeholder{
@@ -85,28 +89,63 @@ input[type="search"]
 }
 
 .video_container{
-    border: 1px solid black;
-    height: 90vh;  /* 需修改回來*/
-    width: 85%;
+    height: 65%;
+    width: 90%;
     display: flex;
-    margin-top: 1rem;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
 .video_detail_container{
-    border: 1px solid red;
-    width: 65%; /* 需修改回來*/
     height: 100%;
     display: flex;
     flex-direction: column;
-    flex-basis: 2;
+    flex-basis: 65%;
+    margin-top: 0.5rem;
+
+}
+
+.video_detail>iframe{
+    height: 400px;
+    width: 100%;
+    outline: none;
 }
 
 .video_items{
-    border: 1px solid yellow;
-    flex-basis: 1;
-    width: 35%; /* 需修改回來flex-basis: 1*/
+    flex-basis: 35%;
+}
+.video_description_container{
+    border: 1px solid #DBE0E0;
+    margin-top: 1rem;
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0.5rem;
+
 }
 
+.video_description_title{
+    font-size: 1.3rem;
+    flex-basis: 20%;
+    color: #203C3C;
+}
+
+.video_description{
+    font-size: 1rem;
+    flex-basis: 80%;
+    height: 30%;
+    color: #454848;
+}
+
+@media (max-width: 480px) {
+    .video_container{
+        height: 100%;
+    }
+}
 
 
 

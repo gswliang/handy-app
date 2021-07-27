@@ -1,0 +1,22 @@
+.videolist_container{
+    display: flex;
+    flex-direction: row;
+    font-family: 'Noto Sans JP', sans-serif;
+    margin: 0.5rem .7rem .5rem;
+    cursor: pointer;
+}
+
+.video_img>img{
+    height: 110px;
+    flex-basis: 2;
+}
+
+.video_title{
+    font-size: 1rem;
+    color: #4A5151;
+    height: 110px;
+    flex-basis: 2;
+    padding: 0 0.2rem;
+    display: flex;
+    align-items: center;
+}

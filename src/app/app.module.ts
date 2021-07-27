@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { NavibarComponent } from './navibar/navibar.component';
 import { VideostreamComponent } from './videostream/videostream.component';
 import { HttpClientModule } from '@angular/common/http';
+import { VideolistComponent } from './videostream/videolist/videolist.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     NavibarComponent,
     VideostreamComponent,
+    VideolistComponent,
   ],
   imports: [
     BrowserModule,

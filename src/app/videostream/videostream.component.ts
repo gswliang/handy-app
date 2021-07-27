@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, distinctUntilChanged, map } from 'rxjs/operators';
+
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { VideoDetailService } from './video-detail.service';
-import { ValueConverter } from '../../../node_modules/@angular/compiler/src/render3/view/template';
 import { Video } from './video.model';
 
 
@@ -13,28 +14,43 @@ import { Video } from './video.model';
   styleUrls: ['./videostream.component.css']
 })
 export class VideostreamComponent implements OnInit {
-  faSearchIcon = faSearch;
-  videoSearch = new Subject<string>();
-  videoData: string[] = [];
-  videoObj: Video;
-  constructor(private videoService: VideoDetailService) { }
+  constructor(private videoService: VideoDetailService, private sanitizer: DomSanitizer) { }
+
+  faSearchIcon = faSearch; D
+  searchTerm: string = '';
+  videoTermSearch$ = new Subject<string>();
+  mainVideo: Video = {};
+  tubeURL: string = 'https://www.youtube.com/embed/';
 
   ngOnInit(): void {
     this.renderVideo();
+    this.videoTermSearch$.next("taipei");
+    this.videoService.updatedVideo.subscribe(arr => this.mainVideo = { ...arr[0] })
   }
 
-  onSubmit(params: string): void {
-    this.videoSearch.next(params);
+  onSubmit(): void {
+    this.videoTermSearch$.next(this.searchTerm);
+    this.searchTerm = '';
   }
 
   renderVideo() {
-    this.videoSearch.pipe(
-      switchMap((searchTerm: string) => this.videoService.getVideos(searchTerm)),
-    ).subscribe(result => result.items.map(value => {
-      console.log(value);
-
-    }))
-
+    this.videoTermSearch$.pipe(
+      distinctUntilChanged(),
+      switchMap(term => this.videoService.getVideos(term)),
+      map(({ items }) => items.map((item) => {
+        return (
+          {
+            videoId: item.id.videoId,
+            title: item.snippet.title,
+            description: item.snippet.description,
+            picURL: item.snippet.thumbnails.high.url
+          })
+      }))
+    ).subscribe(arr => this.videoService.storeVideos(arr));
   }
+  sanitizeURL() {
 
+    const fullURL = `${this.tubeURL}${this.mainVideo.videoId}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(fullURL);
+  }
 }

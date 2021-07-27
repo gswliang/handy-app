@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { of, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,12 @@ export class TodoService {
   ]
   constructor() { }
 
-  getList(): string[] {
-    return this.todoList.slice();
+  getList(): Observable<string[]> {
+    return of(this.todoList);
   }
 
-  addToList(newTodo: string): void {
-    this.todoList.push(newTodo);
+  addToList(newTodo: string) {
+    this.todoList = [...this.todoList, newTodo];
   }
 
   removeFromList(removeItem: string): string[] {

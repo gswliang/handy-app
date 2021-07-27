@@ -1,31 +1,44 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { of, Observable } from 'rxjs';
-import { tap, catchError, map } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { of, Observable, BehaviorSubject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Video } from './video.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoDetailService {
-  APIkey: string = 'AIzaSyD84fA8fesV_dVYDp9pR9vZbpcgVflZF2s';
-  baseURL: string = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResult=10&key=${this.APIkey}&q=`
-
+  // private readonly APIkey: string = 'AIzaSyD84fA8fesV_dVYDp9pR9vZbpcgVflZF2s';
+  private readonly APIkey: string = 'AIzaSyAwJJW6tLkk8YJ3D2s3SFMBOgahTIc9t-8';
+  private readonly baseURL: string = 'https://www.googleapis.com/youtube/v3/search?'
+  private readonly params: HttpParams = new HttpParams()
+    .set('part', 'snippet')
+    .set('type', 'video')
+    .set('maxResult', 10)
+    .set('key', this.APIkey)
+  private videoData: Video[] = [];
+  updatedVideo = new BehaviorSubject<Video[]>(this.videoData);
 
   constructor(private http: HttpClient) { }
 
-  getVideos(term: string = 'taipei'): Observable<any> {
-    this.baseURL = this.baseURL + term;
-    return this.http.get(this.baseURL).pipe(
+  getVideos(term: string) {
+    if (!term) { return of() };
+    const params = this.params.set('q', term);
+    return this.http.get<any>(`${this.baseURL}${params}`).pipe(
       catchError(this.handleError('getApi'))
     )
   }
 
+  storeVideos(param) {
+    this.videoData = [...param];
+    this.updatedVideo.next(this.videoData);
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.log(error);
-      return of(result as T);
+      return of();
     }
   }
 }

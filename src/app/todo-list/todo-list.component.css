@@ -23,55 +23,7 @@
     margin: auto;
 }
 
-.input-area{
-    margin: auto;
-    width: 80%;
-    display: flex;  
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
 
-label{
-    margin-right: 1rem;
-    font-size: 1.5rem;
-    flex-shrink: 1;
-}
-
-input{
-    width: 40%;
-    height: 2rem;
-    flex-shrink: 1;
-    border-radius: .5rem;
-    outline: none;
-    border:  1px solid #1D7CBF;
-    box-shadow: 0 0 2px #8E9998 ;
-}
-
-input[type="search"]
-{
-    font-size: 1.4rem;
-    padding-left: .4rem; 
-}
-
-input:focus {
-    outline: none;
-    border:  1px solid #1D7CBF;
-    box-shadow: 0 0 6px #8E9998 ;
-}
-
-button{
-    width: 5rem;
-    height: 2.2rem;
-    margin-left: 2rem; 
-    background: #20CC9F;
-    color: #fff;
-    font-size: 1rem;
-    border: none;
-    padding: .4rem;
-    border-radius: .5rem;
-}
 .show-content{
     width: 51%;
     margin: auto;

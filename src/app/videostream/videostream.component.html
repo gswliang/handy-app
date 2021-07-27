@@ -5,16 +5,27 @@
         <div class="search_bar_container">
             <div class="search_input">
                 <fa-icon class="search_icon " [icon]="faSearchIcon "></fa-icon>
-                <input class="search_bar" type="search" placeholder="search.." #searchTerm (keyup.enter)='onSubmit(searchTerm.value)' />
+                <input class="search_bar" type="search" placeholder="search.." [(ngModel)]="searchTerm" (keyup.enter)='onSubmit()' />
             </div>
-            <button class="search_btn" (click)='onSubmit(searchTerm.value)'>Search</button>
+            <button class="search_btn" (click)='onSubmit()'>Search</button>
         </div>
     </div>
     <div class="video_container">
         <div class="video_detail_container">
-            <div class="video_detail"></div>
-            <div class="video_description"></div>
+            <div class="video_detail">
+                <iframe [src]="sanitizeURL()" frameborder=" 0 " allowfullscreen></iframe>
+            </div>
+            <div class="video_description_container">
+                <h4 class="video_description_title">
+                    {{mainVideo.title}}
+                </h4>
+                <div class="video_description">
+                    {{mainVideo.description}}
+                </div>
+            </div>
         </div>
-        <div class="video_items"></div>
+        <div class="video_items">
+            <app-videolist></app-videolist>
+        </div>
     </div>
 </div>

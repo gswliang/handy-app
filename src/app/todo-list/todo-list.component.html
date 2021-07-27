@@ -2,9 +2,13 @@
 <div class="todo-container">
     <h1 class="header">Todo-List</h1>
     <div class="form">
-        <div class="input-area">
-            <input type="search" id="todo" [(ngModel)]="todoName" (keyup.enter)="onSubmit()">
-            <button (click)="onSubmit()">Submit</button>
+        <div class="search_bar_container">
+            <div class="search_input">
+                <fa-icon class="search_icon " [icon]="faSearchIcon "></fa-icon>
+                <input class="search_bar" type="search" placeholder="take a break.." [(ngModel)]="todoItems" (keyup.enter)='onSubmit(todoItems)'
+                />
+            </div>
+            <button class="search_btn" (click)='onSubmit(todoItems)'>Submit</button>
         </div>
         <div class="show-content">
             <ul *ngFor="let todo of todoList">
@@ -14,7 +18,6 @@
                         <fa-icon class="icon " [icon]="faTimes "></fa-icon>
                     </div>
                 </li>
-
             </ul>
         </div>
     </div>
