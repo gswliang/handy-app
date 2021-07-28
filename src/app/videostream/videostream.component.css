@@ -146,6 +146,7 @@ input[type="search"]
     }
     .video_container{
         height: 70%;
+        flex-wrap: wrap;
     }
 
     .search_container{
