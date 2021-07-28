@@ -1,31 +1,37 @@
 <app-navibar></app-navibar>
 <div class="main_container">
-    <div class="search_container">
-        <p>uTube - Video Search</p>
-        <div class="search_bar_container">
-            <div class="search_input">
-                <fa-icon class="search_icon " [icon]="faSearchIcon "></fa-icon>
-                <input class="search_bar" type="search" placeholder="search.." [(ngModel)]="searchTerm" (keyup.enter)='onSubmit()' />
-            </div>
-            <button class="search_btn" (click)='onSubmit()'>Search</button>
-        </div>
+  <div class="search_container">
+    <p>uTube - Video Search</p>
+    <div class="search_bar_container">
+      <div class="search_input">
+        <fa-icon class="search_icon" [icon]="faSearchIcon"></fa-icon>
+        <input
+          class="search_bar"
+          type="search"
+          placeholder="search.."
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="onSubmit()"
+        />
+      </div>
+      <button class="search_btn" (click)="onSubmit()">Search</button>
     </div>
-    <div class="video_container">
-        <div class="video_detail_container">
-            <div class="video_detail">
-                <iframe [src]="sanitizeURL(mainVideo)" frameborder=" 0 " allowfullscreen></iframe>
-            </div>
-            <div class="video_description_container">
-                <h4 class="video_description_title">
-                    {{mainVideo.title}}
-                </h4>
-                <div class="video_description">
-                    {{mainVideo.description}}
-                </div>
-            </div>
+  </div>
+  <div class="video_container">
+    <div class="video_detail_container">
+      <div class="video_detail">
+        <iframe [src]="setSanitizeURL()"></iframe>
+      </div>
+      <div class="video_description_container">
+        <h4 class="video_description_title">
+          {{ mainVideo.title }}
+        </h4>
+        <div class="video_description">
+          {{ mainVideo.description }}
         </div>
-        <div class="video_items">
-            <app-videolist (selectedItem)="onSelectedId($event)"></app-videolist>
-        </div>
+      </div>
     </div>
+    <div class="video_items">
+      <app-videolist (selectedItem)="onSelectedId($event)"></app-videolist>
+    </div>
+  </div>
 </div>

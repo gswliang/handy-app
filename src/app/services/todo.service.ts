@@ -2,15 +2,11 @@ import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoService {
-
-  private todoList: string[] = [
-    "walking dogs",
-    "buying groceries"
-  ]
-  constructor() { }
+  private todoList: string[] = ['walking dogs', 'buying groceries'];
+  constructor() {}
 
   getList(): Observable<string[]> {
     return of(this.todoList);
@@ -21,7 +17,7 @@ export class TodoService {
   }
 
   removeFromList(removeItem: string): string[] {
-    this.todoList = this.todoList.filter(item => item != removeItem)
+    this.todoList = this.todoList.filter((item) => item != removeItem);
     return this.todoList;
   }
 }

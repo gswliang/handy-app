@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     height: 1000px;
+
 }
 
 .search_container{
@@ -33,14 +34,14 @@
 .search_input{
     display: flex;
     height: 100%;
-    width: 20rem;
+    width: 80%;
     border: 1px solid #D1D5D5;
     border-radius: 0.2rem;
     align-items: center;
 }
 
 .search_input:focus-within{
-    border: 1px solid #50D9A4;  
+    border: 1px solid #50D9A4;
 }
 
 .search_icon{
@@ -57,7 +58,7 @@
 
 
 .search_btn{
-    width: 6rem;
+    width: 40%;
     height: 100%;
     background: #43C6A4;
     color: #fff;
@@ -92,9 +93,6 @@ input[type="search"]
     height: 65%;
     width: 90%;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
     margin-top: 2rem;
     font-family: 'Noto Sans JP', sans-serif;
 }
@@ -105,7 +103,6 @@ input[type="search"]
     flex-direction: column;
     flex-basis: 65%;
     margin-top: 0.5rem;
-
 }
 
 .video_detail>iframe{
@@ -116,6 +113,7 @@ input[type="search"]
 
 .video_items{
     flex-basis: 35%;
+    margin-left: 1rem;
 }
 .video_description_container{
     border: 1px solid #DBE0E0;
@@ -141,10 +139,64 @@ input[type="search"]
     color: #454848;
 }
 
-@media (max-width: 480px) {
-    .video_container{
-        height: 100%;
+@media (max-width: 468px) {
+
+    .main_container{
+      height: 100%;
     }
+    .video_container{
+        height: 70%;
+    }
+
+    .search_container{
+      width: 100%;
+      height: 180px;
+    }
+
+   .search_container>p{
+       font-size: 1.4rem;
+   }
+
+   .search_bar_container{
+       width: 70%;
+       flex-wrap: wrap;
+   }
+
+   .search_input{
+     width: 100%;
+   }
+
+   .search_btn{
+     margin-top: .7rem;
+     width: 100%;
+   }
+
+   .video_detail_container{
+     height: 100%;
+     flex-basis: 100%;
+   }
+
+   .video_detail>iframe{
+     width: 100%;
+   }
+
+   .video_description_container{
+     height: 70%;
+   }
+
+   .video_description_title{
+     margin: 0;
+     margin-bottom: .8rem;
+     font-size: 1.2rem;
+   }
+
+   .video_items{
+     flex-basis: 100%;
+     margin-top: 1rem;
+   }
+   input[type="search"]{
+     width: 100%;
+   }
 }
 
 

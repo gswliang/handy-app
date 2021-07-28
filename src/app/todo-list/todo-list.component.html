@@ -1,25 +1,31 @@
 <app-navibar></app-navibar>
 <div class="todo-container">
-    <h1 class="header">Todo-List</h1>
-    <div class="form">
-        <div class="search_bar_container">
-            <div class="search_input">
-                <fa-icon class="search_icon " [icon]="faSearchIcon "></fa-icon>
-                <input class="search_bar" type="search" placeholder="take a break.." [(ngModel)]="todoItems" (keyup.enter)='onSubmit(todoItems)'
-                />
-            </div>
-            <button class="search_btn" (click)='onSubmit(todoItems)'>Submit</button>
+  <h1 class="header">Todo-List</h1>
+  <div class="form">
+    <div class="search_container">
+      <div class="search_bar_container">
+        <div class="search_input">
+          <fa-icon class="search_icon" [icon]="faSearchIcon"></fa-icon>
+          <input
+            class="search_bar"
+            type="search"
+            placeholder="take a break.."
+            [(ngModel)]="todoItems"
+            (keyup.enter)="onSubmit(todoItems)"
+          />
         </div>
-        <div class="show-content">
-            <ul *ngFor="let todo of todoList">
-                <li>
-                    <div class="todo">{{todo}}</div>
-                    <div class=" remove " (click)="onRemove(todo) ">
-                        <fa-icon class="icon " [icon]="faTimes "></fa-icon>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <button class="search_btn" (click)="onSubmit(todoItems)">Submit</button>
+      </div>
     </div>
-
+    <div class="show-content">
+      <ul *ngFor="let todo of todoList">
+        <li>
+          <div class="todo">{{ todo }}</div>
+          <div class="remove" (click)="onRemove(todo)">
+            <fa-icon class="icon" [icon]="faTimes"></fa-icon>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

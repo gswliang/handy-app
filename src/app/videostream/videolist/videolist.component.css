@@ -1,4 +1,9 @@
+.list_main_container{
+  width: 100%;
+}
+
 .videolist_container{
+    width: 100%;
     display: flex;
     flex-direction: row;
     font-family: 'Noto Sans JP', sans-serif;
@@ -19,4 +24,21 @@
     padding: 0 0.2rem;
     display: flex;
     align-items: center;
+    margin-left: .4rem;
+}
+
+@media (max-width: 468px) {
+  .videolist_container{
+
+    align-items: center;
+  }
+
+  .video_title{
+    font-size: 0.8rem;
+  }
+
+  .video_img>img{
+    height: 80px;
+}
+
 }

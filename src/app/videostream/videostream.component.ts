@@ -7,16 +7,19 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { VideoDetailService } from './video-detail.service';
 import { Video } from './video.model';
 
-
 @Component({
   selector: 'app-videostream',
   templateUrl: './videostream.component.html',
-  styleUrls: ['./videostream.component.css']
+  styleUrls: ['./videostream.component.css'],
 })
 export class VideostreamComponent implements OnInit {
-  constructor(private videoService: VideoDetailService, private sanitizer: DomSanitizer) { }
+  constructor(
+    private videoService: VideoDetailService,
+    private sanitizer: DomSanitizer
+  ) {}
 
-  faSearchIcon = faSearch; D
+  faSearchIcon = faSearch;
+  D;
   searchTerm: string = '';
   videoTermSearch$ = new Subject<string>();
   mainVideo: Video = {};
@@ -24,8 +27,10 @@ export class VideostreamComponent implements OnInit {
 
   ngOnInit(): void {
     this.renderVideo();
-    this.videoTermSearch$.next("taipei");
-    this.videoService.updatedVideo.subscribe(arr => this.mainVideo = { ...arr[0] })
+    this.videoTermSearch$.next('taipei');
+    this.videoService.updatedVideo.subscribe(
+      (arr) => (this.mainVideo = { ...arr[0] })
+    );
   }
 
   onSubmit(): void {
@@ -34,23 +39,25 @@ export class VideostreamComponent implements OnInit {
   }
 
   renderVideo() {
-    this.videoTermSearch$.pipe(
-      distinctUntilChanged(),
-      switchMap(term => this.videoService.getVideos(term)),
-      map(({ items }) => items.map((item) => {
-        return (
-          {
-            videoId: item.id.videoId,
-            title: item.snippet.title,
-            description: item.snippet.description,
-            picURL: item.snippet.thumbnails.high.url
+    this.videoTermSearch$
+      .pipe(
+        distinctUntilChanged(),
+        switchMap((term) => this.videoService.getVideos(term)),
+        map(({ items }) =>
+          items.map((item) => {
+            return {
+              videoId: item.id.videoId,
+              title: item.snippet.title,
+              description: item.snippet.description,
+              picURL: item.snippet.thumbnails.high.url,
+            };
           })
-      }))
-    ).subscribe(arr => this.videoService.storeVideos(arr));
+        )
+      )
+      .subscribe((arr) => this.videoService.storeVideos(arr));
   }
-  sanitizeURL(showVideo: Video) {
-    const videoId = showVideo.videoId;
-    const fullURL = `${this.tubeURL}${videoId}`;
+  setSanitizeURL() {
+    const fullURL = `${this.tubeURL}${this.mainVideo.videoId}`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(fullURL);
   }
 

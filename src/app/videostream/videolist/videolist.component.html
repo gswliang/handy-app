@@ -1,8 +1,12 @@
-<div class="videolist_container" *ngFor="let list of videoLists$ | async" (click)="onSelected(list)">
-
+<div class="list_main_container">
+  <div
+    class="videolist_container"
+    *ngFor="let list of videoLists$ | async"
+    (click)="onSelected(list)"
+  >
     <div class="video_img">
-        <img src={{list.picURL}} alt={{list.title}}>
+      <img src="{{ list.picURL }}" alt="{{ list.title }}" />
     </div>
-    <div class="video_title">{{list.title}}</div>
-
+    <div class="video_title">{{ list.title }}</div>
+  </div>
 </div>
