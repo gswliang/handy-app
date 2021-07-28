@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { Video } from '../video.model';
 import { VideoDetailService } from '../video-detail.service';
-import { Observable } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-videolist',
@@ -10,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class VideolistComponent implements OnInit {
   videoLists$!: Observable<Video[]>;
-
+  @Output() selectedItem = new EventEmitter<Video>();
 
   constructor(private videoService: VideoDetailService) { }
 
@@ -18,10 +21,7 @@ export class VideolistComponent implements OnInit {
     this.videoLists$ = this.videoService.updatedVideo;
   }
 
-  onSelected(selectedItem) {
-    const videoId = selectedItem.videoId;
+  onSelected(selectedItem: Video) {
+    this.selectedItem.emit(selectedItem);
   }
-
-
-
 }

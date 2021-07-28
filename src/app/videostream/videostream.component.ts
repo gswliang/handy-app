@@ -48,9 +48,13 @@ export class VideostreamComponent implements OnInit {
       }))
     ).subscribe(arr => this.videoService.storeVideos(arr));
   }
-  sanitizeURL() {
-
-    const fullURL = `${this.tubeURL}${this.mainVideo.videoId}`;
+  sanitizeURL(showVideo: Video) {
+    const videoId = showVideo.videoId;
+    const fullURL = `${this.tubeURL}${videoId}`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(fullURL);
+  }
+
+  onSelectedId(selectedItem: Video) {
+    this.mainVideo = selectedItem;
   }
 }

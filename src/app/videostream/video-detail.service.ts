@@ -9,8 +9,8 @@ import { Video } from './video.model';
   providedIn: 'root'
 })
 export class VideoDetailService {
-  // private readonly APIkey: string = 'AIzaSyD84fA8fesV_dVYDp9pR9vZbpcgVflZF2s';
-  private readonly APIkey: string = 'AIzaSyAwJJW6tLkk8YJ3D2s3SFMBOgahTIc9t-8';
+  private readonly APIkey: string = 'AIzaSyD84fA8fesV_dVYDp9pR9vZbpcgVflZF2s';
+  // private readonly APIkey: string = 'AIzaSyAwJJW6tLkk8YJ3D2s3SFMBOgahTIc9t-8';
   private readonly baseURL: string = 'https://www.googleapis.com/youtube/v3/search?'
   private readonly params: HttpParams = new HttpParams()
     .set('part', 'snippet')

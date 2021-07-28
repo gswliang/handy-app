@@ -34,9 +34,13 @@
     display: flex;
     height: 100%;
     width: 20rem;
-    border: 1px solid #E2EBE9;
+    border: 1px solid #D1D5D5;
     border-radius: 0.2rem;
     align-items: center;
+}
+
+.search_input:focus-within{
+    border: 1px solid #50D9A4;  
 }
 
 .search_icon{
@@ -51,10 +55,6 @@
     border: none;
 }
 
-
-.search_input:focus{
-    outline: 1px solid red;  /* #189E7C */
-}
 
 .search_btn{
     width: 6rem;
