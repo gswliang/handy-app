@@ -27,7 +27,7 @@ export class VideostreamComponent implements OnInit {
 
   ngOnInit(): void {
     this.renderVideo();
-    // this.videoTermSearch$.next('taipei');
+    this.videoTermSearch$.next('taipei');
     this.videoService.updatedVideo.subscribe(
       (arr) => (this.mainVideo = { ...arr[0] })
     );
