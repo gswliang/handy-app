@@ -6,6 +6,7 @@ import { of, Observable } from 'rxjs';
 })
 export class TodoService {
   private todoList: string[] = ['walking dogs', 'buying groceries'];
+
   constructor() {}
 
   getList(): Observable<string[]> {

@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Video } from './video.model';
+import { Video, VideoItem } from './video.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VideoDetailService {
-  private readonly APIkey: string = 'AIzaSyD84fA8fesV_dVYDp9pR9vZbpcgVflZF2s';
-  // private readonly APIkey: string = 'AIzaSyAwJJW6tLkk8YJ3D2s3SFMBOgahTIc9t-8';
+  // private readonly APIkey: string = 'AIzaSyD84fA8fesV_dVYDp9pR9vZbpcgVflZF2s';
+  private readonly APIkey: string = 'AIzaSyAwJJW6tLkk8YJ3D2s3SFMBOgahTIc9t-8';
   private readonly baseURL: string =
     'https://www.googleapis.com/youtube/v3/search?';
   private readonly params: HttpParams = new HttpParams()
@@ -17,7 +17,44 @@ export class VideoDetailService {
     .set('type', 'video')
     .set('maxResult', 10)
     .set('key', this.APIkey);
-  private videoData: Video[] = [];
+  // private videoData: Video[] = [];
+  private videoData: Video[] = [
+    {
+      videoId: '_S5eXj-zZpA',
+      title: 'Taipei, Taiwan 2020 - Facts, Sights, People and Food',
+      description:
+        'Taipei #台北 Lets take a tour to Taipei, Taiwan. One of the largest cities in the world renowned for its architecture, technical advancements and friendly people.',
+      picURL: 'https://i.ytimg.com/vi/_S5eXj-zZpA/hqdefault.jpg',
+    },
+    {
+      videoId: '9YL50CiVheo',
+      title: 'Top 7 Things to do in Taipei, TAIWAN',
+      description:
+        'Taipei unexpectedly turned out to be one of our favourite destinations in Asia. Some of the places on this list were absolutely magical. This Taiwan series is the ...',
+      picURL: 'https://i.ytimg.com/vi/9YL50CiVheo/hqdefault.jpg',
+    },
+    {
+      videoId: 'PO8eUBRzTNE',
+      title: 'Taipei, Taiwan 🇹🇼 - by drone (4K)',
+      description:
+        'In this clip you can see all famous sights like the Taipei 101, Elephant Mountain, Agora Garden, Daan Forest Park, New Taipei Bridge, MRT Taoyuan airport Line ...',
+      picURL: 'https://i.ytimg.com/vi/PO8eUBRzTNE/hqdefault.jpg',
+    },
+    {
+      videoId: 'ZNC9V1J-ebg',
+      title: 'Taipei - City Video Guide',
+      description:
+        "http://www.expedia.com.au/Taipei.d180030.Destination-Travel-Guides In recent decades, Taiwan has transformed itself into one of Asia's premier travel ...",
+      picURL: 'https://i.ytimg.com/vi/ZNC9V1J-ebg/hqdefault.jpg',
+    },
+    {
+      videoId: 'sUv1WhMwUZk',
+      title: '10 BEST THINGS TO DO IN TAIPEI | FIRST TIME IN TAIPEI TAIWAN',
+      description:
+        'Get £5 FREE by using code BABE5: http://bit.ly/2K4oCWq The Curve card allows you to spend from any of your accounts using just one Curve Mastercard® (no ...',
+      picURL: 'https://i.ytimg.com/vi/sUv1WhMwUZk/hqdefault.jpg',
+    },
+  ];
   updatedVideo = new BehaviorSubject<Video[]>(this.videoData);
 
   constructor(private http: HttpClient) {}
@@ -32,7 +69,7 @@ export class VideoDetailService {
       .pipe(catchError(this.handleError('getApi')));
   }
 
-  storeVideos(param) {
+  storeVideos(param: Video[]) {
     this.videoData = [...param];
     this.updatedVideo.next(this.videoData);
   }

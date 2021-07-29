@@ -25,10 +25,10 @@ export class TodoListComponent implements OnInit {
   onSubmit(todoItem: string): void {
     if (todoItem) {
       this.todoService.addToList(todoItem);
-      this.todoItems = '';
       this.todoService.getList().subscribe((value) => {
         this.todoList = value;
       });
+      this.todoItems = '';
     }
   }
   onRemove(removeItem: string): void {

@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 
 import { Video } from '../video.model';
 import { VideoDetailService } from '../video-detail.service';
+import { WatchlaterService } from 'src/app/services/watchlater.service';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-videolist',
@@ -11,9 +13,14 @@ import { VideoDetailService } from '../video-detail.service';
 })
 export class VideolistComponent implements OnInit {
   videoLists$!: Observable<Video[]>;
+  faClock = faClock;
+  isDisabled: boolean = false;
   @Output() selectedItem = new EventEmitter<Video>();
 
-  constructor(private videoService: VideoDetailService) {}
+  constructor(
+    private videoService: VideoDetailService,
+    private addTodoList: WatchlaterService
+  ) {}
 
   ngOnInit(): void {
     this.videoLists$ = this.videoService.updatedVideo;
@@ -21,5 +28,9 @@ export class VideolistComponent implements OnInit {
 
   onSelected(selectedItem: Video) {
     this.selectedItem.emit(selectedItem);
+  }
+
+  onAddTodo(addTodo: Video) {
+    this.addTodoList.addToList(addTodo);
   }
 }
