@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { todo, TodoVideo } from './todo.model';
+import { StoreService } from '../store.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,27 +14,29 @@ import { faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
   ],
 })
 export class TodoListComponent implements OnInit {
-  todoList: string[] = [];
-  todoItems: string = '';
   faTimes = faTimesCircle;
   faSearchIcon = faSearch;
+  todos$: Observable<todo[]>;
 
-  constructor(private todoService: TodoService) {}
+  constructor(
+    private todoService: TodoService,
+    private readonly store: StoreService
+  ) {
+    this.todos$ = this.store.todos$;
+  }
 
   ngOnInit(): void {
-    this.todoService.getList().subscribe((arr) => (this.todoList = arr));
+    // this.todos$ = this.store.todos$;
   }
 
-  onSubmit(todoItem: string): void {
-    if (todoItem) {
-      this.todoService.addToList(todoItem);
-      this.todoService.getList().subscribe((value) => {
-        this.todoList = value;
-      });
-      this.todoItems = '';
-    }
+  onSubmit(text: string): void {
+    const state = this.store.state;
+    const newTodo: todo = { text };
+    this.store.update({ ...state, todos: [...state.todos, newTodo] });
   }
-  onRemove(removeItem: string): void {
-    this.todoList = this.todoService.removeFromList(removeItem);
+
+  onRemove(removeItem: todo): void {
+    // console.log(removeItem);
+    this.store.removeState(removeItem);
   }
 }

@@ -34,24 +34,48 @@
 }
 
 .watch_later_btn{
-  border: 1px solid palegreen;
-  font-family: 'Noto Sans TC', sans-serif;
-  flex-basis: 30%;
-  font-size: 1.1rem;
-  background: tomato;
-  color: #fff;
-  width: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
+  font-family: 'Noto Sans JP', sans-serif;
+  padding: 12px 5px;
+  box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.5);
+  line-height: 1.25;
+  width: 40%;
+  background: #FC6E51;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
   margin-left: auto;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  position: relative;
+  transition: background-color .6s ease;
+  overflow: hidden;
   border: none;
+  cursor: pointer;
+}
+
+.watch_later_btn::after{
+  content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    transform-style: flat;
+    transform: translate3d(-50%,-50%,0);
+    background: rgba(white,.1);
+    border-radius: 100%;
+    transition: width .3s ease, height .3s ease;
 }
 
 .watch_later_btn:hover{
   background-color: #E96436;
 }
+
+.watch_later_btn:active{
+  transform: translateY(1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
 
 .watch_later_btn:disabled{
   background-color: #F5C8B8;

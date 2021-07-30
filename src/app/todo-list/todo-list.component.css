@@ -2,8 +2,8 @@
     max-width: 85%;
     height: 1000px;
     margin: auto;
-    font-family: 'Noto Sans JP', sans-serif;
     box-sizing: border-box;
+    /* margin-top: 1rem; */
 }
 
 .header{

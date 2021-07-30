@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Video, VideoItem } from './video.model';
+import { Video } from '../videostream/video.model';
 
 @Injectable({
   providedIn: 'root',

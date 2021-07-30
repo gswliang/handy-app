@@ -2,13 +2,9 @@
 nav{
     display: flex;
     justify-content: flex-start;
-    font-family: 'Noto Sans JP', sans-serif;
     background: #20CC9F;
     height: 60px;
     width: 100%;
-    position: fixed;
-    margin-top: 0;
-    z-index: 11;
 }
 
 .navbar{

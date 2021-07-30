@@ -2,9 +2,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Video } from '../video.model';
-import { VideoDetailService } from '../video-detail.service';
 import { WatchlaterService } from 'src/app/services/watchlater.service';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { VideoDetailService } from 'src/app/services/video-detail.service';
+import { StoreService } from 'src/app/store.service';
+import { todo } from 'src/app/todo-list/todo.model';
 
 @Component({
   selector: 'app-videolist',
@@ -19,7 +21,8 @@ export class VideolistComponent implements OnInit {
 
   constructor(
     private videoService: VideoDetailService,
-    private addTodoList: WatchlaterService
+    private addTodoList: WatchlaterService,
+    private store: StoreService
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +33,10 @@ export class VideolistComponent implements OnInit {
     this.selectedItem.emit(selectedItem);
   }
 
-  onAddTodo(addTodo: Video) {
-    this.addTodoList.addToList(addTodo);
+  onAddTodo(addTodo: Video, event: Event) {
+    event.stopPropagation();
+    const state = this.store.state;
+    const addVideo: todo = { text: addTodo.title, videoId: addTodo.videoId };
+    this.store.update({ ...state, todos: [...state.todos, addVideo] });
   }
 }

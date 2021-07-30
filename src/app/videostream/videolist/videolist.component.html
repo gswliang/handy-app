@@ -11,7 +11,7 @@
       <div class="video_title">{{ list.title }}</div>
       <button
         class="watch_later_btn"
-        (click)="onAddTodo(list)"
+        (click)="onAddTodo(list, $event)"
         [disabled]="isDisabled"
       >
         <fa-icon class="faPlus" [icon]="faClock"></fa-icon>

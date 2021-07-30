@@ -1,4 +1,18 @@
 <app-navibar></app-navibar>
+
+<!-- <input #todoInput type="text" (keyup.enter)="add(todoInput.value)" />
+
+<ul>
+  <li *ngFor="let todo of todos$ | async">{{ todo.text }}</li>
+</ul>
+
+<ul>
+  <li *ngFor="let todo of todos$ | async">{{ todo.text }}</li>
+</ul>
+
+<ul>
+  <li *ngFor="let todo of todos$ | async">{{ todo.text }}</li>
+</ul> -->
 <div class="todo-container">
   <h1 class="header">Todo-List</h1>
   <div class="form">
@@ -10,17 +24,19 @@
             class="search_bar"
             type="search"
             placeholder="take a break.."
-            [(ngModel)]="todoItems"
-            (keyup.enter)="onSubmit(todoItems)"
+            #todoInput
+            (keyup.enter)="onSubmit(todoInput.value)"
           />
         </div>
-        <button class="search_btn" (click)="onSubmit(todoItems)">Submit</button>
+        <button class="search_btn" (click)="onSubmit(todoInput.value)">
+          Submit
+        </button>
       </div>
     </div>
     <div class="show-content">
-      <ul *ngFor="let todo of todoList">
+      <ul *ngFor="let todo of todos$ | async">
         <li>
-          <div class="todo">{{ todo }}</div>
+          <div class="todo">{{ todo.text }}</div>
           <div class="remove" (click)="onRemove(todo)">
             <fa-icon class="icon" [icon]="faTimes"></fa-icon>
           </div>

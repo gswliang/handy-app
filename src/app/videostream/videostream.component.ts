@@ -4,8 +4,8 @@ import { Subject } from 'rxjs';
 import { switchMap, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { VideoDetailService } from './video-detail.service';
 import { Video, VideoItem, VideoResult } from './video.model';
+import { VideoDetailService } from '../services/video-detail.service';
 
 @Component({
   selector: 'app-videostream',
