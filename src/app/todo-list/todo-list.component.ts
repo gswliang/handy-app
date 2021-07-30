@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { todo, TodoVideo } from './todo.model';
-import { StoreService } from '../store.service';
+import { State, StoreService } from '../store.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -36,7 +36,6 @@ export class TodoListComponent implements OnInit {
   }
 
   onRemove(removeItem: todo): void {
-    // console.log(removeItem);
     this.store.removeState(removeItem);
   }
 }

@@ -104,6 +104,7 @@ input[type="search"]
     flex-direction: column;
     flex-basis: 65%;
     margin-top: 0.5rem;
+    /* flex-shrink: 0; */
 }
 
 .video_detail>iframe{
@@ -139,7 +140,6 @@ input[type="search"]
     height: 30%;
     color: #454848;
 }
-
 
 @media (max-width: 768px) {
 

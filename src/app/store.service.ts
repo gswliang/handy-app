@@ -35,11 +35,18 @@ export class StoreService {
   // getter / setter
 
   removeState(removeItem: todo) {
-    this.state$
-      .pipe(
-        pluck('todos'),
-        map((arr) => arr.filter((item) => item !== removeItem))
-      )
-      .subscribe(console.log);
+    const newState: todo[] = this.state.todos.filter(
+      (arr) => arr.text !== removeItem.text
+    );
+    this.store$.next({ ...this.state, todos: newState });
   }
+
+  // removeState(removeItem: todo) {
+  //   this.state$
+  //     .pipe(
+  //       pluck('todos'),
+  //       map((arr) => arr.filter((item) => item !== removeItem))
+  //     )
+  //     .subscribe((val) => val);
+  // }
 }
