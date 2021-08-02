@@ -23,8 +23,7 @@ export class VideolistComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSelectedItem() {
-    const id = this.route.snapshot.paramMap.get('id');
+  onSelectedItem(id: string | undefined) {
     this.videoService.selectedVideo(id);
   }
 

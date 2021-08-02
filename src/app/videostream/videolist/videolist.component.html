@@ -1,9 +1,8 @@
-<div
-  class="list_main_container"
-  *ngFor="let list of videoLists$ | async"
-  (click)="onSelectedItem()"
->
-  <a [routerLink]="['/utube', list.videoId]">
+<div class="list_main_container" *ngFor="let list of videoLists$ | async">
+  <a
+    [routerLink]="['/utube', list.videoId]"
+    (click)="onSelectedItem(list.videoId)"
+  >
     <div class="videolist_container">
       <div class="video_img">
         <img src="{{ list.picURL }}" alt="{{ list.title }}" />
