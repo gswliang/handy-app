@@ -104,23 +104,23 @@ input[type="search"]
     flex-direction: column;
     flex-basis: 65%;
     margin-top: 0.5rem;
-    /* flex-shrink: 0; */
 }
 
 .video_detail>iframe{
     height: 500px;
     width: 100%;
-    outline: none;
+    border: none;
 }
 
 .video_items{
     margin-top: 0.5rem;
     margin-left: 1rem;
+    flex-basis: 35%;
 }
 .video_description_container{
     border: 1px solid #DBE0E0;
     margin-top: 1rem;
-    height: 18%;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

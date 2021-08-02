@@ -4,16 +4,16 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { HomeComponent } from './home/home.component';
 import { VideostreamComponent } from './videostream/videostream.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'todo', component: TodoListComponent },
   { path: 'home', component: HomeComponent },
   { path: 'utube', component: VideostreamComponent },
+  { path: 'utube/:id', component: VideostreamComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

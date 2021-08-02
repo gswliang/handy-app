@@ -1,22 +1,24 @@
 <div
   class="list_main_container"
   *ngFor="let list of videoLists$ | async"
-  (click)="onSelected(list)"
+  (click)="onSelectedItem()"
 >
-  <div class="videolist_container">
-    <div class="video_img">
-      <img src="{{ list.picURL }}" alt="{{ list.title }}" />
+  <a [routerLink]="['/utube', list.videoId]">
+    <div class="videolist_container">
+      <div class="video_img">
+        <img src="{{ list.picURL }}" alt="{{ list.title }}" />
+      </div>
+      <div class="title_container">
+        <div class="video_title">{{ list.title }}</div>
+        <button
+          class="watch_later_btn"
+          (click)="onAddTodo(list, $event)"
+          [disabled]="list.isDisabled"
+        >
+          <fa-icon class="faPlus" [icon]="faClock"></fa-icon>
+          稍後觀看
+        </button>
+      </div>
     </div>
-    <div class="title_container">
-      <div class="video_title">{{ list.title }}</div>
-      <button
-        class="watch_later_btn"
-        (click)="onAddTodo(list, $event)"
-        [disabled]="list.isDisabled"
-      >
-        <fa-icon class="faPlus" [icon]="faClock"></fa-icon>
-        稍後觀看
-      </button>
-    </div>
-  </div>
+  </a>
 </div>

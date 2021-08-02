@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { of, Observable, BehaviorSubject } from 'rxjs';
+import { of, Observable, BehaviorSubject, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Video } from '../videostream/video.model';
 import { StoreService } from '../store.service';
@@ -22,48 +22,46 @@ export class VideoDetailService {
 
   private videoData: Video[] = [
     {
-      videoId: '_S5eXj-zZpA',
-      title: 'Taipei, Taiwan 2020 - Facts, Sights, People and Food',
+      videoId: '2F4m5Gg3IVo',
+      title: '戴資穎自評東奧 享受比賽肯定陳雨菲/愛爾達電視20210801',
       description:
-        'Taipei #台北 Lets take a tour to Taipei, Taiwan. One of the largest cities in the world renowned for its architecture, technical advancements and friendly people.',
-      picURL: 'https://i.ytimg.com/vi/_S5eXj-zZpA/hqdefault.jpg',
-      isDisabled: false,
+        '東京奧運羽球女單金牌戰戴資穎不敵陳雨菲拿下銀牌小戴賽後分享這一次每場比賽都是硬仗不過很享受跟對手過招並且打出漂亮好球時候也感謝所有台灣人都當他的 ...',
+      picURL: 'https://i.ytimg.com/vi/2F4m5Gg3IVo/hqdefault.jpg',
     },
     {
-      videoId: '9YL50CiVheo',
-      title: 'Top 7 Things to do in Taipei, TAIWAN',
+      videoId: 'vVRzxWR0KWM',
+      title:
+        '羽球場下是好朋友！戴資穎大合照奧運8強　網翻出：好可愛｜三立新聞網 SETN.com',
       description:
-        'Taipei unexpectedly turned out to be one of our favourite destinations in Asia. Some of the places on this list were absolutely magical. This Taiwan series is the ...',
-      picURL: 'https://i.ytimg.com/vi/9YL50CiVheo/hqdefault.jpg',
-      isDisabled: false,
+        '觀看【三立即時新聞】最新訊息搶先看：http://bit.ly/36jnhEA ◎按讚【三立新聞FB】重大快訊一手掌握：http://bit.ly/2JDZ7c7 ◎下載【三立新聞網APP】隨走隨看新聞 ...',
+      picURL: 'https://i.ytimg.com/vi/vVRzxWR0KWM/hqdefault.jpg',
     },
     {
-      videoId: 'PO8eUBRzTNE',
-      title: 'Taipei, Taiwan 🇹🇼 - by drone (4K)',
+      videoId: 'JTo5Yx8-_rs',
+      title: '戴資穎力戰三局落敗 東京奧運獲銀牌/愛爾達電視20210801',
       description:
-        'In this clip you can see all famous sights like the Taipei 101, Elephant Mountain, Agora Garden, Daan Forest Park, New Taipei Bridge, MRT Taoyuan airport Line ...',
-      picURL: 'https://i.ytimg.com/vi/PO8eUBRzTNE/hqdefault.jpg',
-      isDisabled: false,
+        '東京奧運羽球項目女子單打金牌戰世界球后戴資穎再度對決中國對手陳雨菲兩個人上演三局大戰戴資穎在想要主動進攻掌握節奏的情況下較多失誤雖然決勝局從最多 ...',
+      picURL: 'https://i.ytimg.com/vi/JTo5Yx8-_rs/hqdefault.jpg',
     },
     {
-      videoId: 'ZNC9V1J-ebg',
-      title: 'Taipei - City Video Guide',
+      videoId: 'lyXM6aXvpDI',
+      title: '「銀」恨!戴資穎不敵陳雨菲 奧運羽球女單史上第一銀｜TVBS新聞',
       description:
-        "http://www.expedia.com.au/Taipei.d180030.Destination-Travel-Guides In recent decades, Taiwan has transformed itself into one of Asia's premier travel ...",
-      picURL: 'https://i.ytimg.com/vi/ZNC9V1J-ebg/hqdefault.jpg',
-      isDisabled: false,
+        '本錄影遵守防疫規範，所有人員皆經量體溫、消毒，並全程配戴口罩疫苗接種與猝死之間的關聯尚無定論請注意指揮中心提供資訊✓密切鎖定【國民大會】快來 ...',
+      picURL: 'https://i.ytimg.com/vi/lyXM6aXvpDI/hqdefault.jpg',
     },
     {
-      videoId: 'sUv1WhMwUZk',
-      title: '10 BEST THINGS TO DO IN TAIPEI | FIRST TIME IN TAIPEI TAIWAN',
+      videoId: 'tPZJS-cN7DQ',
+      title: '【LIVE】7/31 戴資穎東奧羽球女單4強賽 戴爸爸看轉播替小戴加油!',
       description:
-        'Get £5 FREE by using code BABE5: http://bit.ly/2K4oCWq The Curve card allows you to spend from any of your accounts using just one Curve Mastercard® (no ...',
-      picURL: 'https://i.ytimg.com/vi/sUv1WhMwUZk/hqdefault.jpg',
-      isDisabled: false,
+        '訂閱運動雲頻道:https://bit.ly/2Sp37CA #2020東京奧運#戴資穎#羽球.',
+      picURL: 'https://i.ytimg.com/vi/tPZJS-cN7DQ/hqdefault.jpg',
     },
   ];
   private updatedVideo$ = new BehaviorSubject<Video[]>(this.videoData);
+  private mainVideo$ = new BehaviorSubject<Video>(this.videoData[0]);
   storeVideo$ = this.updatedVideo$.asObservable();
+  showVideo$ = this.mainVideo$.asObservable();
 
   constructor(private http: HttpClient, private store: StoreService) {}
 
@@ -79,6 +77,12 @@ export class VideoDetailService {
 
   get getVideoList(): Video[] {
     return this.updatedVideo$.getValue();
+  }
+
+  selectedVideo(id: string | null | undefined) {
+    const list = this.getVideoList;
+    const result = list.filter((arr) => arr.videoId === id);
+    this.mainVideo$.next(result[0]);
   }
 
   updateVideo(param: Video[]) {

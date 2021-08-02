@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoService } from '../services/todo.service';
 import { faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { todo } from './todo.model';
 import { State, StoreService } from '../store.service';
@@ -20,7 +19,6 @@ export class TodoListComponent implements OnInit {
   todos$: Observable<todo[]> = this.store.todos$;
 
   constructor(
-    private todoService: TodoService,
     private readonly store: StoreService,
     private videoService: VideoDetailService
   ) {}
@@ -29,6 +27,8 @@ export class TodoListComponent implements OnInit {
 
   onSubmit(text: string): void {
     const state = this.store.state;
+    console.log(state);
+
     const newTodo: todo = { text };
     this.store.update({ ...state, todos: [...state.todos, newTodo] });
   }
@@ -41,5 +41,9 @@ export class TodoListComponent implements OnInit {
     const newObj: State = { ...state, todos: newState };
     this.store.update(newObj);
     this.videoService.statusCheck(removeItem, false);
+  }
+
+  onWatch(videoId: string) {
+    this.videoService.selectedVideo(videoId);
   }
 }

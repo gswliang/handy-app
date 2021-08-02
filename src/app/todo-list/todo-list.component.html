@@ -21,12 +21,28 @@
     </div>
     <div class="show-content">
       <ul *ngFor="let todo of todos$ | async">
-        <li>
-          <div class="todo">{{ todo.text }}</div>
-          <div class="remove" (click)="onRemove(todo)">
-            <fa-icon class="icon" [icon]="faTimes"></fa-icon>
-          </div>
+        <li *ngIf="todo.videoId; else elseBlock">
+          <a
+            class="todo_link"
+            routerLink="/utube/{{ todo.videoId }}"
+            (click)="onWatch(todo.videoId)"
+          >
+            <div class="todo">{{ todo.text }}</div>
+
+            <div class="remove" (click)="onRemove(todo)">
+              <fa-icon class="icon" [icon]="faTimes"></fa-icon>
+            </div>
+          </a>
         </li>
+
+        <ng-template #elseBlock>
+          <li>
+            <div class="todo">{{ todo.text }}</div>
+            <div class="remove" (click)="onRemove(todo)">
+              <fa-icon class="icon" [icon]="faTimes"></fa-icon>
+            </div>
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>

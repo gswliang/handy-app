@@ -29,6 +29,11 @@
     align-items: center;
 }
 
+a{
+  text-decoration: none;
+  /* border: 2px solid #E96436; */
+}
+
 .faPlus{
   margin-right: .2rem;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Subject } from 'rxjs';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Observable, Subject } from 'rxjs';
 import { switchMap, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -21,17 +21,13 @@ export class VideostreamComponent implements OnInit {
   faSearchIcon = faSearch;
   searchTerm: string = '';
   videoTermSearch$ = new Subject<string>();
-  mainVideo: Video = {};
+  mainVideo!: Video;
   tubeURL: string = 'https://www.youtube.com/embed/';
-  safeURL: any;
+  safeURL!: SafeResourceUrl;
 
   ngOnInit(): void {
     this.renderVideo();
-    // this.videoTermSearch$.next('taipei');
-    this.videoService.storeVideo$.subscribe((arr) => {
-      this.mainVideo = { ...arr[0] };
-      this.safeURL = this.setSanitizeURL();
-    });
+    this.onSelectedVideo();
   }
 
   onSubmit(): void {
@@ -57,15 +53,20 @@ export class VideostreamComponent implements OnInit {
           })
         )
       )
-      .subscribe((arr) => this.videoService.updateVideo(arr));
+      .subscribe((arr) => {
+        this.videoService.updateVideo(arr);
+        this.videoService.selectedVideo(arr[0].videoId);
+      });
   }
   setSanitizeURL() {
     const fullURL = `${this.tubeURL}${this.mainVideo.videoId}`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(fullURL);
   }
 
-  onSelectedId(selectedItem: Video) {
-    this.mainVideo = selectedItem;
-    this.safeURL = this.setSanitizeURL();
+  onSelectedVideo() {
+    this.videoService.showVideo$.subscribe((item) => {
+      this.mainVideo = item;
+      this.safeURL = this.setSanitizeURL();
+    });
   }
 }

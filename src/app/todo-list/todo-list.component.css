@@ -3,7 +3,6 @@
     height: 1000px;
     margin: auto;
     box-sizing: border-box;
-    /* margin-top: 1rem; */
 }
 
 .header{
@@ -35,7 +34,7 @@
     margin-bottom: .2rem;
 }
 
-.show-content>ul>li{
+.show-content>ul>li,a{
     box-shadow: 0 0 2px #737C7B;
     padding: .5rem;
     background: #40927D;
@@ -46,6 +45,16 @@
     justify-content: space-between;
     align-items: center;
     align-self: flex-end;
+    text-decoration: none;
+}
+
+a{
+  padding: 0;
+  width: 100%;
+}
+
+a:hover{
+  color: #F5F7D2;
 }
 
 button:hover{
@@ -61,7 +70,6 @@ button:hover{
     width: 10%;
     display: flex;
     justify-content: center;
-
 }
 
 .icon{
