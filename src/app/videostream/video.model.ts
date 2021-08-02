@@ -3,6 +3,7 @@ export interface Video {
   title?: string;
   description?: string;
   picURL?: string;
+  isDisabled?: boolean;
 }
 
 export interface VideoResult {

@@ -13,12 +13,12 @@ export interface State {
 export class StoreService {
   constructor() {}
   private readonly initState: State = {
-    todos: [{ text: 'Walking dog' }, { text: 'Booking ticket' }],
+    todos: [{ text: 'Walking dog' }, { text: 'Booking a ticket' }],
   };
 
   private readonly store$ = new BehaviorSubject<State>(this.initState);
   private readonly state$ = this.store$.asObservable();
-  todos$ = this.state$.pipe(
+  readonly todos$ = this.state$.pipe(
     pluck<State, todo[]>('todos'),
     distinctUntilChanged()
   );
@@ -29,24 +29,28 @@ export class StoreService {
 
   update(state: State) {
     this.store$.next(state);
-    this.todos$.subscribe(console.log);
+    // this.todos$.subscribe(console.log); //bad practice, shouldn't be subscribe multiple times.
   }
 
-  // getter / setter
-
-  removeState(removeItem: todo) {
-    const newState: todo[] = this.state.todos.filter(
-      (arr) => arr.text !== removeItem.text
-    );
-    this.store$.next({ ...this.state, todos: newState });
-  }
+  // // getter / setter
 
   // removeState(removeItem: todo) {
-  //   this.state$
-  //     .pipe(
-  //       pluck('todos'),
-  //       map((arr) => arr.filter((item) => item !== removeItem))
-  //     )
-  //     .subscribe((val) => val);
+  //   const editArr: todo[] = this.state.todos.filter(
+  //     (arr) => arr.text !== removeItem.text
+  //   );
+  //   this.store$.next({ ...this.state, todos: editArr });
   // }
+
+  // set state(newObj: State) {
+  //   this.store$.next(newObj);
+  // }
+
+  // // removeState(removeItem: todo) {
+  // //   this.state$
+  // //     .pipe(
+  // //       pluck('todos'),
+  // //       map((arr) => arr.filter((item) => item !== removeItem))
+  // //     )
+  // //     .subscribe((val) => val);
+  // // }
 }

@@ -3,6 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Video } from '../videostream/video.model';
+import { StoreService } from '../store.service';
+import { todo } from '../todo-list/todo.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +19,7 @@ export class VideoDetailService {
     .set('type', 'video')
     .set('maxResult', 10)
     .set('key', this.APIkey);
-  // private videoData: Video[] = [];
+
   private videoData: Video[] = [
     {
       videoId: '_S5eXj-zZpA',
@@ -25,6 +27,7 @@ export class VideoDetailService {
       description:
         'Taipei #台北 Lets take a tour to Taipei, Taiwan. One of the largest cities in the world renowned for its architecture, technical advancements and friendly people.',
       picURL: 'https://i.ytimg.com/vi/_S5eXj-zZpA/hqdefault.jpg',
+      isDisabled: false,
     },
     {
       videoId: '9YL50CiVheo',
@@ -32,6 +35,7 @@ export class VideoDetailService {
       description:
         'Taipei unexpectedly turned out to be one of our favourite destinations in Asia. Some of the places on this list were absolutely magical. This Taiwan series is the ...',
       picURL: 'https://i.ytimg.com/vi/9YL50CiVheo/hqdefault.jpg',
+      isDisabled: false,
     },
     {
       videoId: 'PO8eUBRzTNE',
@@ -39,6 +43,7 @@ export class VideoDetailService {
       description:
         'In this clip you can see all famous sights like the Taipei 101, Elephant Mountain, Agora Garden, Daan Forest Park, New Taipei Bridge, MRT Taoyuan airport Line ...',
       picURL: 'https://i.ytimg.com/vi/PO8eUBRzTNE/hqdefault.jpg',
+      isDisabled: false,
     },
     {
       videoId: 'ZNC9V1J-ebg',
@@ -46,6 +51,7 @@ export class VideoDetailService {
       description:
         "http://www.expedia.com.au/Taipei.d180030.Destination-Travel-Guides In recent decades, Taiwan has transformed itself into one of Asia's premier travel ...",
       picURL: 'https://i.ytimg.com/vi/ZNC9V1J-ebg/hqdefault.jpg',
+      isDisabled: false,
     },
     {
       videoId: 'sUv1WhMwUZk',
@@ -53,11 +59,13 @@ export class VideoDetailService {
       description:
         'Get £5 FREE by using code BABE5: http://bit.ly/2K4oCWq The Curve card allows you to spend from any of your accounts using just one Curve Mastercard® (no ...',
       picURL: 'https://i.ytimg.com/vi/sUv1WhMwUZk/hqdefault.jpg',
+      isDisabled: false,
     },
   ];
-  updatedVideo = new BehaviorSubject<Video[]>(this.videoData);
+  private updatedVideo$ = new BehaviorSubject<Video[]>(this.videoData);
+  storeVideo$ = this.updatedVideo$.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: StoreService) {}
 
   getVideos(term: string) {
     if (!term) {
@@ -69,9 +77,25 @@ export class VideoDetailService {
       .pipe(catchError(this.handleError('getApi')));
   }
 
-  storeVideos(param: Video[]) {
+  get getVideoList(): Video[] {
+    return this.updatedVideo$.getValue();
+  }
+
+  updateVideo(param: Video[]) {
     this.videoData = [...param];
-    this.updatedVideo.next(this.videoData);
+    this.updatedVideo$.next(this.videoData);
+  }
+
+  statusCheck(onStatusChange: todo, isDisabled: boolean) {
+    let videoList = this.getVideoList;
+
+    videoList.forEach((video) => {
+      if (video.videoId === onStatusChange.videoId) {
+        video.isDisabled = isDisabled;
+      }
+    });
+
+    this.updateVideo(videoList);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

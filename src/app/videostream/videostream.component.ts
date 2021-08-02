@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { switchMap, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Video, VideoItem, VideoResult } from './video.model';
+import { Video, VideoItem } from './video.model';
 import { VideoDetailService } from '../services/video-detail.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class VideostreamComponent implements OnInit {
   ngOnInit(): void {
     this.renderVideo();
     // this.videoTermSearch$.next('taipei');
-    this.videoService.updatedVideo.subscribe((arr) => {
+    this.videoService.storeVideo$.subscribe((arr) => {
       this.mainVideo = { ...arr[0] };
       this.safeURL = this.setSanitizeURL();
     });
@@ -45,18 +45,19 @@ export class VideostreamComponent implements OnInit {
       .pipe(
         distinctUntilChanged(),
         switchMap((term) => this.videoService.getVideos(term)),
-        map((result): Video[] =>
+        map((result: any): Video[] =>
           result.items.map((item: VideoItem) => {
             return {
               videoId: item?.id?.videoId,
               title: item?.snippet?.title,
               description: item?.snippet?.description,
               picURL: item?.snippet?.thumbnails?.high?.url,
+              isDisable: false,
             };
           })
         )
       )
-      .subscribe((arr) => this.videoService.storeVideos(arr));
+      .subscribe((arr) => this.videoService.updateVideo(arr));
   }
   setSanitizeURL() {
     const fullURL = `${this.tubeURL}${this.mainVideo.videoId}`;
