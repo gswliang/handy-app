@@ -43,7 +43,8 @@ export class TodoListComponent implements OnInit {
     this.videoService.statusCheck(removeItem, false);
   }
 
-  onWatch(videoId: string) {
+  onWatch(videoId: string, removeItem: todo) {
     this.videoService.selectedVideo(videoId);
+    this.onRemove(removeItem);
   }
 }
