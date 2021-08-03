@@ -1,0 +1,27 @@
+
+nav{
+    display: flex;
+    justify-content: flex-start;
+    background: #20CC9F;
+    height: 60px;
+    width: 100%;
+}
+
+.navbar{
+    font-size: 1.5rem;
+    width: 130px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar>a{
+    text-decoration: none;
+    padding: .5rem;
+    color: #fff;
+}
+
+.navbar:hover{
+    background: #1FA17F;
+}

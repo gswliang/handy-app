@@ -1,0 +1,10 @@
+<div class='home-container'>
+    <div class="background"></div>
+    <h1>Personal App</h1>
+    <p>Choose your favorite applications</p>
+    <nav>
+        <div class="navbar" *ngFor="let nav of navs">
+            <a routerLink='/{{nav | lowercase}}'>{{nav}}</a>
+        </div>
+    </nav>
+</div>

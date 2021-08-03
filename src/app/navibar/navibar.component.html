@@ -1,0 +1,5 @@
+<nav>
+  <div class="navbar" *ngFor="let nav of navs">
+    <a routerLink="/{{ nav | lowercase }}">{{ nav }}</a>
+  </div>
+</nav>
