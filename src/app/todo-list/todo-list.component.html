@@ -22,11 +22,7 @@
     <div class="show-content">
       <ul *ngFor="let todo of todos$ | async">
         <li *ngIf="todo.videoId; else elseBlock">
-          <a
-            class="todo_link"
-            (click)="onSelectedVideo(todo)"
-            routerLink="/utube/{{ todo.videoId }}"
-          >
+          <a class="todo_link" routerLink="/utube/{{ todo.videoId }}">
             <div class="todo">
               {{ todo.text }}
             </div>

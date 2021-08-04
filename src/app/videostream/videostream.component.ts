@@ -29,15 +29,18 @@ export class VideostreamComponent implements OnInit {
   mainVideoUrl$: Observable<SafeResourceUrl | null> = combineLatest([
     this.paramId$,
     this.store.video$,
+    this.store.paramId$,
   ]).pipe(
-    map(([paramId, videoList]) => paramId ?? videoList[0]?.videoId),
+    map(([paramId, videoList, storeParamId]) => {
+      paramId && this.store.update({ ...this.store.state, paramId });
+      return paramId ?? storeParamId ?? videoList[0].videoId;
+    }),
     map((mainVideoId) =>
       mainVideoId ? this.getSanitizeURL(mainVideoId) : null
     )
   );
 
   tubeURL: string = 'https://www.youtube.com/embed/';
-  safeURL!: SafeResourceUrl;
 
   ngOnInit(): void {
     this.renderVideo();
@@ -46,7 +49,6 @@ export class VideostreamComponent implements OnInit {
   onSubmit(): void {
     this.videoTermSearch$.next(this.searchTerm);
     this.searchTerm = '';
-    // 0 ?? 'hi'
   }
 
   renderVideo() {

@@ -28,6 +28,7 @@
     justify-content: center;
     height: 3rem;
     margin-top: 1rem;
+    width: 40%;
     padding: .4rem;
 }
 
@@ -55,7 +56,6 @@
     height: 2.5rem;
     border: none;
 }
-
 
 .search_btn{
     width: 40%;

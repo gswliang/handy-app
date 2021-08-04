@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { Video } from '../video.model';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { VideoDetailService } from 'src/app/services/video-detail.service';
