@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Observable, Subject } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { switchMap, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Video, VideoItem } from './video.model';
 import { VideoDetailService } from '../services/video-detail.service';
+import { StoreService } from '../store.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-videostream',
@@ -14,20 +16,31 @@ import { VideoDetailService } from '../services/video-detail.service';
 })
 export class VideostreamComponent implements OnInit {
   constructor(
+    private route: ActivatedRoute,
     private videoService: VideoDetailService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private store: StoreService
   ) {}
 
   faSearchIcon = faSearch;
   searchTerm: string = '';
   videoTermSearch$ = new Subject<string>();
-  mainVideo!: Video;
+  paramId$ = this.route.paramMap.pipe(map((paramMap) => paramMap.get('id')));
+  mainVideoUrl$: Observable<SafeResourceUrl | null> = combineLatest([
+    this.paramId$,
+    this.store.video$,
+  ]).pipe(
+    map(([paramId, videoList]) => paramId ?? videoList[0]?.videoId),
+    map((mainVideoId) =>
+      mainVideoId ? this.getSanitizeURL(mainVideoId) : null
+    )
+  );
+
   tubeURL: string = 'https://www.youtube.com/embed/';
   safeURL!: SafeResourceUrl;
 
   ngOnInit(): void {
     this.renderVideo();
-    this.onSelectedVideo();
   }
 
   onSubmit(): void {
@@ -48,25 +61,18 @@ export class VideostreamComponent implements OnInit {
               title: item?.snippet?.title,
               description: item?.snippet?.description,
               picURL: item?.snippet?.thumbnails?.high?.url,
-              isDisable: false,
             };
           })
         )
       )
-      .subscribe((arr) => {
-        this.videoService.updateVideo(arr);
-        this.videoService.selectedVideo(arr[0].videoId);
+      .subscribe((videos) => {
+        const state = this.store.state;
+        this.store.update({ ...state, videos });
       });
   }
-  setSanitizeURL() {
-    const fullURL = `${this.tubeURL}${this.mainVideo.videoId}`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(fullURL);
-  }
 
-  onSelectedVideo() {
-    this.videoService.showVideo$.subscribe((item) => {
-      this.mainVideo = item;
-      this.safeURL = this.setSanitizeURL();
-    });
+  private getSanitizeURL(videoId: string | undefined) {
+    const fullURL = `${this.tubeURL}${videoId}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(fullURL);
   }
 }

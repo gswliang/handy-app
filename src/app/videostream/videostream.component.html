@@ -16,20 +16,22 @@
       <button class="search_btn" (click)="onSubmit()">Search</button>
     </div>
   </div>
+
   <div class="video_container">
-    <div class="video_detail_container">
+    <div *ngIf="mainVideoUrl$ | async as url" class="video_detail_container">
       <div class="video_detail">
-        <iframe [src]="safeURL"></iframe>
+        <iframe [src]="url"></iframe>
       </div>
-      <div class="video_description_container">
+      <!-- <div class="video_description_container">
         <h4 class="video_description_title">
           {{ mainVideo.title }}
         </h4>
         <div class="video_description">
           {{ mainVideo.description }}
         </div>
-      </div>
+      </div> -->
     </div>
+
     <div class="video_items">
       <app-videolist></app-videolist>
     </div>
