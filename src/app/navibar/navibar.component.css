@@ -25,3 +25,14 @@ nav{
 .navbar:hover{
     background: #1FA17F;
 }
+
+.navActivate{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 43px;
+  width: 100%;
+  background: #1FA17F;
+
+}
+
