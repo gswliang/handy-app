@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { faTimesCircle, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { todo } from './todo.model';
-import { State, StoreService } from '../store.service';
-
+import { State, StoreService } from '../services/store.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: [
     './todo-list.component.css',
-    '../videostream/videostream.component.css',
+    '../inputsection/inputsection.component.css',
   ],
 })
 export class TodoListComponent implements OnInit {
@@ -16,7 +16,7 @@ export class TodoListComponent implements OnInit {
   faSearchIcon = faSearch;
   todos$ = this.store.todos$;
 
-  constructor(private readonly store: StoreService) {}
+  constructor(private readonly store: StoreService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -34,8 +34,4 @@ export class TodoListComponent implements OnInit {
     const newObj: State = { ...state, todos: newState };
     this.store.update(newObj);
   }
-
-  // onSelectedVideo(selectedTodo: todo) {
-  //   this.onRemove(selectedTodo);
-  // }
 }

@@ -1,0 +1,15 @@
+<div class="container" *ngIf="getStatus$ | async as video">
+  <h1 class="header">{{ video.title }}</h1>
+  <app-inputsection (searchTerm)="onSearch($event)"></app-inputsection>
+
+  <div *ngIf="mainVideoUrl$ | async as url" class="video_detail_container">
+    <div class="video_detail">
+      <iframe [src]="url"></iframe>
+    </div>
+    <div class="video_description_container">
+      <div class="video_description">
+        {{ video.description }}
+      </div>
+    </div>
+  </div>
+</div>

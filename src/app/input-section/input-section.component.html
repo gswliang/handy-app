@@ -1,0 +1,19 @@
+<div class="main_container">
+  <div class="search_container">
+    <div class="search_bar_container">
+      <div class="search_input">
+        <fa-icon class="search_icon" [icon]="faSearchIcon"></fa-icon>
+        <input
+          class="search_bar"
+          type="search"
+          placeholder="search.."
+          #inputTerm
+          (keyup.enter)="onSubmit(inputTerm.value)"
+        />
+      </div>
+      <button class="search_btn" (click)="onSubmit(inputTerm.value)">
+        Search
+      </button>
+    </div>
+  </div>
+</div>

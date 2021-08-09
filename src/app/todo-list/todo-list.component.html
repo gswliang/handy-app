@@ -1,4 +1,3 @@
-<app-navibar></app-navibar>
 <div class="todo-container">
   <h1 class="header">Todo-List</h1>
   <div class="form">
@@ -22,7 +21,7 @@
     <div class="show-content">
       <ul *ngFor="let todo of todos$ | async">
         <li *ngIf="todo.videoId; else elseBlock">
-          <a class="todo_link" routerLink="/utube/{{ todo.videoId }}">
+          <a class="todo_link" routerLink="/utube/detail/{{ todo.videoId }}">
             <div class="todo">
               {{ todo.text }}
             </div>

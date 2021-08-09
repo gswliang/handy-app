@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, pluck } from 'rxjs/operators';
-import { videoData } from './mock/videos-mock';
-import { todo } from './todo-list/todo.model';
-import { Video } from './videostream/video.model';
+import { videoData } from '../mock/videos-mock';
+import { todo } from '../todo-list/todo.model';
+import { Video } from '../videostream/video.model';
 
 export interface State {
   todos: todo[];
   videos: Video[];
-  paramId: string | null;
 }
 
 @Injectable({
@@ -18,8 +17,7 @@ export class StoreService {
   constructor() {}
   private readonly initState: State = {
     todos: [{ text: 'Walking dog' }, { text: 'Booking a ticket' }],
-    videos: videoData,
-    paramId: null,
+    videos: [],
   };
 
   private readonly store$ = new BehaviorSubject<State>(this.initState);
@@ -31,11 +29,6 @@ export class StoreService {
 
   readonly video$ = this.state$.pipe(
     pluck<State, Video[]>('videos'),
-    distinctUntilChanged()
-  );
-
-  readonly paramId$ = this.state$.pipe(
-    pluck<State, string>('paramId'),
     distinctUntilChanged()
   );
 

@@ -4,9 +4,9 @@ import { combineLatest } from 'rxjs';
 import { Video } from '../video.model';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { VideoDetailService } from 'src/app/services/video-detail.service';
-import { StoreService } from 'src/app/store.service';
+import { StoreService } from 'src/app/services/store.service';
 import { todo } from 'src/app/todo-list/todo.model';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-videolist',

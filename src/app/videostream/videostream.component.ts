@@ -7,7 +7,7 @@ import { switchMap, distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Video, VideoItem } from './video.model';
 import { VideoDetailService } from '../services/video-detail.service';
-import { StoreService } from '../store.service';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-videostream',
@@ -33,22 +33,22 @@ export class VideostreamComponent implements OnInit {
     .pipe(map((queryParam) => queryParam.get('search')))
     .subscribe((searchTerm) => (this.queryParam = searchTerm));
   paramId$ = this.route.paramMap.pipe(map((paramMap) => paramMap.get('id')));
-  mainVideoUrl$: Observable<SafeResourceUrl | null> = combineLatest([
-    this.paramId$,
-    this.store.video$,
-    this.store.paramId$,
-  ]).pipe(
-    tap(
-      ([paramId]) =>
-        paramId && this.store.update({ ...this.store.state, paramId })
-    ),
-    map(([paramId, videoList, storeParamId]) => {
-      return paramId ?? storeParamId ?? videoList[0].videoId;
-    }),
-    map((mainVideoId) =>
-      mainVideoId ? this.getSanitizeURL(mainVideoId) : null
-    )
-  );
+  // mainVideoUrl$: Observable<SafeResourceUrl | null> = combineLatest([
+  //   this.paramId$,
+  //   this.store.video$,
+  //   this.store.paramId$,
+  // ]).pipe(
+  //   tap(
+  //     ([paramId]) =>
+  //       paramId && this.store.update({ ...this.store.state, paramId })
+  //   ),
+  //   map(([paramId, videoList, storeParamId]) => {
+  //     return paramId ?? storeParamId ?? videoList[0].videoId;
+  //   }),
+  //   map((mainVideoId) =>
+  //     mainVideoId ? this.getSanitizeURL(mainVideoId) : null
+  //   )
+  // );
 
   ngOnInit(): void {
     this.renderVideo();
