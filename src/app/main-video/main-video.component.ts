@@ -9,8 +9,8 @@ import { Video } from 'src/app/videostream/video.model';
 
 @Component({
   selector: 'app-mainvideo',
-  templateUrl: './mainvideo.component.html',
-  styleUrls: ['./mainvideo.component.css'],
+  templateUrl: './main-video.component.html',
+  styleUrls: ['./main-video.component.css'],
 })
 export class MainvideoComponent implements OnInit {
   constructor(

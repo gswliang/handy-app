@@ -5,7 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { UtubeComponent } from './utube/utube.component';
 import { NavibarComponent } from './navibar/navibar.component';
 import { ResultComponent } from './result/result.component';
-import { MainvideoComponent } from './mainvideo/mainvideo.component';
+import { MainvideoComponent } from './main-video/main-video.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },

@@ -11,10 +11,9 @@ import { VideostreamComponent } from './videostream/videostream.component';
 import { HttpClientModule } from '@angular/common/http';
 import { VideolistComponent } from './videostream/videolist/videolist.component';
 import { UtubeComponent } from './utube/utube.component';
-import { InputsectionComponent } from './inputsection/inputsection.component';
-// import { UtubecontainerComponent } from './utubecontainer/utubecontainer.component';
+import { InputsectionComponent } from './input-section/input-section.component';
 import { ResultComponent } from './result/result.component';
-import { MainvideoComponent } from './mainvideo/mainvideo.component';
+import { MainvideoComponent } from './main-video/main-video.component';
 
 @NgModule({
   declarations: [
